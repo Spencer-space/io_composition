@@ -1,0 +1,35 @@
+This repository contains:
+iocomp software (full model, .c, .h, and makefile)
+IoCompBox (MATLAB code for the reduced model)
+  IoCompBox_plotting (MATLAB code for plotting solutions to the reduced model)
+Data used to plot figures 2, 3, 5 and 6
+
+Information on full model:
+
+IoComp is a piece of software that solves a system of partial differential equations describing the dynamic evolution of heat-pipe bodies, in particular Io. It builds on that in Spencer et al (2020) with the introduction of a simple compositional model. This software was written by Dan C Spencer.
+
+The model is written with the Portable, Extensible Toolkit for Scientific Computation (PETSc). PETSc can be installed from here:
+
+https://www.mcs.anl.gov/petsc/download/index.html
+
+Upon installation, and after the creation of the PETSC_ARCH and PETSC_DIR global variables (place them in your .bashrc file or similar), use 'make' to compile the code.
+
+The compiled code can be run simply with
+
+./iocomp
+
+The parameters are set in the ParameterSetup function, and to run with different parameter settings, these can be input from the command line, for example
+
+./iocomp -hhat 200 -Pc 0.3 -Te 0.4 -bulk_comp 0.2
+
+The software can be run for a single component by setting bulk_comp to 0 or 1.
+
+The software produces output files in an 'outputs' folder in the form of binary files. These can be read into MATLAB using PETSc's MATLAB interface functions, for example in MATLAB by running (having ensured that PETSc's sharing functions are on your MATLAB path
+
+PetscReadBinaryMatlab(filename);
+
+Steady-state outputs are produced and placed in a 'SS_outputs' folder, and can be read by MATLAB similarly.
+
+If you have any questions about the code, or are having any difficulties, please don't hesitate to contact Dan (dan.spencer@earth.ox.ac.uk)
+
+If using this software for a publication, please cite Spencer, Katz, and Hewitt (2020) - "Compositional layering in Io driven by magmatic segregation and volcanism"
